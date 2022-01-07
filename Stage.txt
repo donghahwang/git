@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include <time.h>
+#include<windows.h>
+
+int main ()
+{
+    time_t rawtime;
+
+while(1)
+{
+time ( &rawtime );
+printf("요일 월 일 시:분:초  년도\n");
+printf ( "%s", ctime (&rawtime) );
+Sleep(100);
+system("cls");
+}
+    return 0;
+}
