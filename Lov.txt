@@ -1,0 +1,52 @@
+#include<stdio.h>
+#include<math.h> //fabs()[절댓값], pow()[제곱]
+
+double Bisection_(double a, double b); //바이색션 알고리즘
+double F(double x); //대상 함수
+
+int main()
+{
+	double a, b; //임의의 두 점
+
+	printf("INPUT a b : ");
+	scanf_s("%lf", &a);
+	scanf_s("%lf", &b);
+
+	Bisection_(a, b);
+}
+
+double Bisection_(double a, double b)
+{
+	double e1 = 0.000001; //x축과 F(min)사이의 거리가 e1이하인 경우 답이라고 가정한다.
+	double e2 = 0.000001; //a와 b의 사이가 너무 가까우면 프로그램 종료
+	int Num = 1000; //루프 회전수 제한
+
+	double min; //중간값
+	int i = 1; //카운터
+
+	while (i <= Num) //카운터가 Num이하인 경우 회전
+	{
+		min = a + (b - a) / 2; //a와 b의 중간값 계산
+
+		printf("(%d) min = %lf\n", i, min); //계산된 중간 값 출력
+
+		if ((fabs(F(min)) < e1) || ((b - a) / 2 < e2)) //성공 계산
+		{
+			printf("Solution is %lf\n", min); //중간값 출력
+			return min; //중간값 반환
+		}
+		i += 1; //카운터 증가
+		if (F(b)*F(min) < 0) //a와 min의 Y값의 곱이 0보다 크면
+			a = min; //중간값은 [min, b] 구간에 있는 것이므로 a의 값을 min으로 바꿔준다.
+		else //그게 아니라면
+			b = min; //중간값은 [a,min] 구간에 존재하므로 b의 값을 min으로 바꿔준다.
+	}
+	printf("Method Failed\n"); //위 조건이 만족 하지 않다면 중간값 찾기 실패
+	return 0;
+}
+
+double F(double x) //대상 함수
+{
+	return exp(x) + x;
+}
+
