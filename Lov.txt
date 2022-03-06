@@ -44,9 +44,3 @@ double Bisection_(double a, double b)
 	printf("Method Failed\n"); //위 조건이 만족 하지 않다면 중간값 찾기 실패
 	return 0;
 }
-
-double F(double x) //대상 함수
-{
-	return exp(x) + x;
-}
-
