@@ -15,7 +15,7 @@ int main()
 double Bisection_(double a, double b)
 {
 	double e1 = 0.000001; //x축과 F(min)사이의 거리가 e1이하인 경우 답이라고 가정한다.
-	double e2 = 0.000001; //a와 b의 사이가 너무 가까우면 프로그램 종료
+	double e2 = 0.000001; //a와 b의 사이가 가까우면 프로그램 종료
 	int Num = 1000; //루프 회전수 제한
 
 	double min; //중간값
