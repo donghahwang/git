@@ -1,0 +1,97 @@
+#include<stdio.h>
+#include<windows.h>
+
+#define X 3 //X축 길이
+#define Y 3 //Y축 길이
+int main()
+{
+int map[X][Y]={0};
+int x=0,y=0;
+int MODE=1;
+int error=1;
+int num_x_1=0, num_y_1=0, num_z_1=0, num__z_1=0;
+int num_x_2=0, num_y_2=0, num_z_2=0, num__z_2=0;
+int i,j;
+
+while(1)
+{
+printf("+");
+for(j=0;j<X;j++)
+printf("---");
+printf("+");
+printf("\n");
+for(i=Y-1;i>=0;i--)
+{
+printf("|");
+for(j=0;j<X;j++)
+{
+if(map[i][j]==1)
+printf("○ ");
+else if(map[i][j]==2)
+printf("△ ");
+else
+printf("%d%d ",j,i);
+}
+printf("|");
+printf("\n");
+}
+printf("+");
+for(j=0;j<X;j++)
+printf("---");
+printf("+");
+
+if(MODE==0)
+printf("\n*○ turn*\n");
+else if(MODE==1)
+printf("\n*△ turn*\n");
+while(error)
+{
+printf("(X, Y) = ");
+scanf("%d",&x);
+scanf("%d",&y);
+if(x>=0&&x<X && y>=0&&y<Y && map[y][x]==0)
+error=0;
+else
+printf("rekey\n");
+}
+error=1;
+map[y][x]=MODE+1;
+MODE=MODE!=1;
+
+for(i=0;i<Y;i++)
+{
+for(j=0;j<X;j++)
+{
+if(map[i][j]==1)
+num_x_1+=1;
+if(map[j][i]==1)
+num_y_1+=1;
+if(map[j][j]==1)
+num_z_1+=1;
+if(map[2-j][j]==1)
+num__z_1+=1;
+
+if(map[i][j]==2)
+num_x_2+=1;
+if(map[j][i]==2)
+num_y_2+=1;
+if(map[j][j]==2)
+num_z_2+=1;
+if(map[2-j][j]==2)
+num__z_2+=1;
+}
+if(num_x_1==X || num_y_1==X || num_z_1==X || num__z_1==X)
+{
+printf("○ WIN\n\n");
+return 0;
+}
+else if(num_x_2==X || num_y_2==X || num_z_2==X || num__z_2==X)
+{
+printf("△ WIN\n\n");
+return 0;
+}
+num_x_1=num_y_1=num_z_1=num__z_1=num_x_2=num_y_2=num_z_2=num__z_2=0;
+}
+system("cls");
+}
+}
