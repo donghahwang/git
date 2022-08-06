@@ -1,0 +1,263 @@
+//////////////////////////////////////////////////////////////////////////
+//C언어 코드
+//////////////////////////////////////////////////////////////////////////
+#include<stdio.h>
+#include<windows.h>
+#include <stdlib.h>
+#include <time.h>
+#define INOREASE 255 //증가 정도
+#define TIME 15 //delay 시간
+
+int MAT_M[5][3] = {
+      {2,3,4},
+      {5,6,7},
+      {8,9,10},
+      {11,12,13},
+      {44,45,46}
+};
+int MAT[15] = {0};
+int mat_1[15] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14};
+int mat_2[15] = {0,1,2,5,8,11,14,13,12,9,6,3,4,7,10};
+int MODE;
+int M;
+
+void RE();
+void PRINT();
+void UP_DOWN();
+void SNAIL();
+void RANDOM();
+void SNAIL_2();
+
+int main()
+{
+srand(time(NULL));
+while(1)
+{
+MODE = rand()%4;
+switch(MODE)
+{
+case 0:
+UP_DOWN();
+RE();
+break;
+case 1:
+SNAIL();
+RE();
+break;
+case 2:
+RANDOM();
+RE();
+break;
+case 3:
+SNAIL_2();
+RE();
+break;
+}
+}
+}
+
+void RE()
+{
+int i;
+for(i=0;i<<sizeof(MAT)/sizeof(int);i++)
+MAT[i]=0;
+}
+void PRINT()
+{
+int i;
+
+system("cls");
+printf("MODE = %d\n",MODE);
+printf("M = %d\n",M);
+for(i=0;i<sizeof(MAT)/sizeof(int);i++)
+{
+if(i%3==0)
+printf("\n");
+if(MAT[i]==1)
+printf("● ");
+else if(MAT[i]==0)
+printf("○ ");
+}
+}
+
+void UP_DOWN()
+{
+int i,j;
+M = rand()%2;
+if(M == 0)
+{
+for(i=0;i<sizeof(mat_1)/sizeof(int);i+=3)
+{
+for(j=0;j<=255;j+=INOREASE)
+{
+MAT[mat_1[i]]=1;
+MAT[mat_1[i+1]]=1;
+MAT[mat_1[i+2]]=1;
+PRINT();
+Sleep(TIME);
+}
+}
+
+for(i=sizeof(mat_1)/sizeof(int) - 1;i>=0;i-=3)
+{
+for(j=255;j>=0;j-=INOREASE)
+{
+MAT[mat_1[i]]=0;
+MAT[mat_1[i-1]]=0;
+MAT[mat_1[i-2]]=0;
+PRINT();
+Sleep(TIME);
+}
+}
+}
+else if(M == 1)
+{
+for(i=sizeof(mat_1)/sizeof(int) - 1;i>=0;i-=3)
+{
+for(j=0;j<=255;j+=INOREASE)
+{
+MAT[mat_1[i]]=1;
+MAT[mat_1[i-1]]=1;
+MAT[mat_1[i-2]]=1;
+PRINT();
+Sleep(TIME);
+}
+}
+
+for(i=0;i<sizeof(mat_1)/sizeof(int);i+=3)
+{
+for(j=255;j>=0;j-=INOREASE)
+{
+MAT[mat_1[i]]=0;
+MAT[mat_1[i+1]]=0;
+MAT[mat_1[i+2]]=0;
+PRINT();
+Sleep(TIME);
+}
+}
+}
+}
+
+void SNAIL()
+{
+int i,j;
+
+M = rand()%2;
+if(M == 0)
+{
+for(i=0;i<sizeof(mat_2)/sizeof(int);i++)
+{
+for(j=0;j<=255;j+=INOREASE)
+{
+MAT[mat_2[i]]=1;
+PRINT();
+Sleep(TIME);
+}
+}
+
+for(i=0;i<sizeof(mat_2)/sizeof(int);i++)
+{
+for(j=255;j>=0;j-=INOREASE)
+{
+MAT[mat_2[i]]=0;
+PRINT();
+Sleep(TIME);
+}
+}
+}
+
+else if(M == 1)
+{
+for(i=sizeof(mat_2)/sizeof(int)-1;i>=0;i--)
+{
+for(j=0;j<=255;j+=INOREASE)
+{
+MAT[mat_2[i]]=1;
+PRINT();
+Sleep(TIME);
+}
+}
+
+for(i=sizeof(mat_2)/sizeof(int)-1;i>=0;i--)
+{
+for(j=255;j>=0;j-=INOREASE)
+{
+MAT[mat_2[i]]=0;
+PRINT();
+Sleep(TIME);
+}
+}
+}
+}
+
+void SNAIL_2()
+{
+int i,j;
+
+M = rand()%2;
+if(M == 0)
+{
+for(i=0;i<sizeof(mat_2)/sizeof(int);i++)
+{
+for(j=0;j<=255;j+=INOREASE)
+{
+MAT[mat_2[i]]=1;
+MAT[mat_2[i-1]]=1;
+PRINT();
+Sleep(TIME);
+}
+for(j=255;j>=0;j-=INOREASE)
+{
+MAT[mat_2[i]]=0;
+MAT[mat_2[i-1]]=0;
+PRINT();
+Sleep(TIME);
+}
+}
+}
+else if(M == 1)
+{
+for(i=sizeof(mat_2)/sizeof(int)-1;i>=0;i--)
+{
+for(j=0;j<=255;j+=INOREASE)
+{
+MAT[mat_2[i]]=1;
+MAT[mat_2[i-1]]=1;
+PRINT();
+Sleep(TIME);
+}
+for(j=255;j>=0;j-=INOREASE)
+{
+MAT[mat_2[i]]=0;
+MAT[mat_2[i-1]]=0;
+PRINT();
+Sleep(TIME);
+}
+}
+}
+}
+
+void RANDOM()
+{
+int i;
+int a,b,c;
+  
+for(i=0;i<10;i++)
+{
+a = rand()%15;
+b = rand()%15;
+if(a==b)
+continue;
+c = rand()%15;
+if(c==b || c==a)
+continue;
+MAT[a]=1;
+MAT[b]=1;
+MAT[c]=1;
+PRINT();
+Sleep(100);
+MAT[a]=0;
+MAT[b]=0;
+MAT[c]=0;
+}
+}
