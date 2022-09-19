@@ -1,9 +1,6 @@
 #include<stdio.h>
 #include<math.h> //fabs()[절댓값], pow()[제곱]
 
-double Bisection_(double a, double b); //바이색션 알고리즘
-double F(double x); //대상 함수
-
 int main()
 {
 	double a, b; //임의의 두 점
