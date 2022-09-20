@@ -7,7 +7,7 @@
 #include <time.h>
 #define INOREASE 255 //증가 정도
 #define TIME 15 //delay 시간
-
+//I Love You
 int MAT_M[5][3] = {
       {2,3,4},
       {5,6,7},
